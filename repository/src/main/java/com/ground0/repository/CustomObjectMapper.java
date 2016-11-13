@@ -35,10 +35,13 @@ import org.threeten.bp.format.DateTimeFormatter;
     configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
-    registerModule(new CustomLocalDateTimeJsonModule());
-    registerModule(new CustomLocalDateJsonModule());
-    registerModule(new CustomTimeInstantJsonModule());
-    registerModule(new CustomLocalTimeJsonModule());
+    /**
+     * Not required for this application
+     */
+    //registerModule(new CustomLocalDateTimeJsonModule());
+    //registerModule(new CustomLocalDateJsonModule());
+    //registerModule(new CustomTimeInstantJsonModule());
+    //registerModule(new CustomLocalTimeJsonModule());
   }
 
   private static class CustomLocalDateSerializer extends JsonSerializer<LocalDate> {

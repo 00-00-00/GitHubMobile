@@ -1,7 +1,7 @@
 package com.ground0.repository.store;
 
 import android.util.Log;
-import com.ground0.model.Coordinate;
+import com.ground0.model.Repo;
 import com.ground0.repository.BuildConfig;
 import com.ground0.repository.CustomObjectMapper;
 import com.ground0.repository.HttpResponseInterceptor;
@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -54,14 +53,7 @@ import rx.schedulers.Schedulers;
     restImpl = retrofit.create(Store.class);
   }
 
-  @Override public Observable<ResponseBody> pingLocation(Coordinate coordinate) {
-    return restImpl.pingLocation(coordinate).lift(responseStatusOperator);
-  }
-
-  @Override
-  public Observable<List<String>> getUsers(Double latitude, Double longitude, Long startEpoch,
-      Long endEpoch, Integer radius) {
-    return restImpl.getUsers(latitude, longitude, startEpoch, endEpoch, radius)
-        .lift(responseStatusOperator);
+  @Override public Observable<List<Repo>> getUsers(String userName) {
+    return restImpl.getUsers(userName).lift(responseStatusOperator);
   }
 }

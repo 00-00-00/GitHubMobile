@@ -41,5 +41,4 @@ import rx.subjects.BehaviorSubject;
       CloudDataStore store) {
     return store;
   }
-
 }

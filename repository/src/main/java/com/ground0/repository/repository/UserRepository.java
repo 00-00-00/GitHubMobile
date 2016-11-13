@@ -1,8 +1,7 @@
 package com.ground0.repository.repository;
 
-import com.ground0.model.Coordinate;
+import com.ground0.model.Repo;
 import java.util.List;
-import okhttp3.ResponseBody;
 import rx.Observable;
 
 /**
@@ -11,6 +10,5 @@ import rx.Observable;
 
 public interface UserRepository {
 
-  Observable<ResponseBody> pingLocation(Coordinate coordinate);
-  Observable<List<String>> getUsers(Double latitude, Double longitude, Long startEpoch, Long endEpoch, Integer radius);
+  Observable<List<Repo>> getUsers(String userName);
 }
