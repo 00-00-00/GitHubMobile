@@ -21,6 +21,11 @@
 
   <style name="RoundedButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
     <item name="android:background">@drawable/rounded_button_bg</item>
+    <item name="android:textColor">@color/md_light_primary_text</item>
+  </style>
+
+  <style name="RoundedButtonStyle.Coloured" parent="RoundedButtonStyle">
+    <item name="android:background">@drawable/coloured_rounded_button_bg</item>
     <item name="android:textColor">@color/md_dark_primary_text</item>
   </style>
 
