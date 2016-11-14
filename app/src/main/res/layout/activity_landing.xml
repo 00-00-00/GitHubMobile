@@ -1,8 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/a_landing_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/a_landing_frame"
     >
-  <include layout="@layout/a_landing_scene_a"/>
+  <include
+      layout="@layout/a_landing_scene_a"
+      />
 
 </FrameLayout>

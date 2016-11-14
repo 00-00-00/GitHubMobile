@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.ground0.githubmobile.core.Event;
 import com.ground0.githubmobile.core.di.component.ApplicationComponent;
+import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
@@ -43,6 +44,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   public PublishSubject<Event> getLocalPublishBus() {
     return localPublishBus;
+  }
+
+  public BehaviorSubject<Event> getSystemBus() {
+    return getBaseApplication().appBehaviourBus;
   }
 
   public void showSnackBar(String content, String action, View.OnClickListener onClickListener) {
