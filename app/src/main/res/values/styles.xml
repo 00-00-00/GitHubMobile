@@ -1,11 +1,37 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="GithubMobileTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorPrimary</item>
+    <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+    <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
+  </style>
+
+  <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+    <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
+  </style>
+
+  <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+    <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
+  </style>
+
+  <style name="RoundedButtonStyle" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
+    <item name="android:background">@drawable/rounded_button_bg</item>
+    <item name="android:textColor">@color/md_dark_primary_text</item>
+  </style>
+
+  <style name="GithubMobileTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorPrimary</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+    <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
   </style>
 
 </resources>
