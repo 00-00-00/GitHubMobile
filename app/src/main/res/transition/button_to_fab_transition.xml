@@ -3,11 +3,11 @@
     android:duration="500"
     android:interpolator="@interpolator/mr_fast_out_slow_in"
     android:transitionOrdering="sequential">
-  <changeTransform/>
-  <arcMotion
-      android:interpolator="@interpolator/mr_fast_out_slow_in"
-      android:maximumAngle="90"
-      android:minimumHorizontalAngle="90"
-      android:minimumVerticalAngle="0"/>
-  <changeTransform/>
+  <changeBounds>
+    <arcMotion
+        android:maximumAngle="90"
+        android:minimumHorizontalAngle="90"
+        android:minimumVerticalAngle="0"/>
+  </changeBounds>
+
 </transitionSet>

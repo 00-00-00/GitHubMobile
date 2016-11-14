@@ -52,6 +52,7 @@
       android:layout_marginTop="-24dp"
       android:elevation="@dimen/fab_elevation"
       android:text="View"
+      android:transitionName="@string/activity_fab_trans"
       app:layout_anchor="@id/a_landing_scene_b_card"
       app:layout_anchorGravity="bottom|center_horizontal"
       style="@style/RoundedButtonStyle.Coloured"

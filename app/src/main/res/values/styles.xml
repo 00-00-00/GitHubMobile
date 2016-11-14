@@ -10,8 +10,12 @@
     <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
     <item name="android:windowContentTransitions">true</item>
-    <item name="android:windowEnterTransition">@transition/button_to_fab_transition</item>
-    <item name="android:windowExitTransition">@transition/button_to_fab_transition</item>
+    <item name="android:windowSharedElementEnterTransition">
+      @transition/button_to_fab_transition
+    </item>
+    <item name="android:windowSharedElementExitTransition">
+      @transition/button_to_fab_transition
+    </item>
   </style>
 
   <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
@@ -46,8 +50,12 @@
     <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
     <item name="android:windowContentTransitions">true</item>
-    <item name="android:windowEnterTransition">@transition/button_to_fab_transition</item>
-    <item name="android:windowExitTransition">@transition/button_to_fab_transition</item>
+    <item name="android:windowSharedElementEnterTransition">
+      @transition/button_to_fab_transition
+    </item>
+    <item name="android:windowSharedElementExitTransition">
+      @transition/button_to_fab_transition
+    </item>
   </style>
 
 </resources>
