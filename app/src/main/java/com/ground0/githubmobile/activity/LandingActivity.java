@@ -1,8 +1,9 @@
 package com.ground0.githubmobile.activity;
 
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.transition.ChangeBounds;
 import android.transition.Scene;
 import android.transition.Transition;
@@ -46,30 +47,29 @@ public class LandingActivity extends BaseActivity {
   private void initScenes() {
 
     // Create the scenes
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-      sceneA = Scene.getSceneForLayout(mSceneRoot, R.layout.a_landing_scene_a, this);
-      sceneB = Scene.getSceneForLayout(mSceneRoot, R.layout.a_landing_scene_b, this);
-      sceneB.setEnterAction(() -> {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation_0_1);
-        animation.setInterpolator(new AccelerateDecelerateInterpolator());
-        animation.setStartOffset(500);
-        findViewById(R.id.a_landing_scene_b_button).setAnimation(animation);
-        findViewById(R.id.a_landing_scene_b_button).animate();
-        EditText editText = (EditText) findViewById(R.id.a_landing_scene_b_username);
-        findViewById(R.id.a_landing_scene_b_button).setOnClickListener(v -> {
-          getSystemBus().onNext(new LaunchListEvent(editText.getText().toString()));
-        });
+    sceneA = Scene.getSceneForLayout(mSceneRoot, R.layout.a_landing_scene_a, this);
+    sceneB = Scene.getSceneForLayout(mSceneRoot, R.layout.a_landing_scene_b, this);
+    sceneB.setEnterAction(() -> {
+      Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation_0_1);
+      animation.setInterpolator(new AccelerateDecelerateInterpolator());
+      animation.setStartOffset(500);
+      findViewById(R.id.a_landing_scene_b_button).setAnimation(animation);
+      findViewById(R.id.a_landing_scene_b_button).animate();
+      EditText editText = (EditText) findViewById(R.id.a_landing_scene_b_username);
+      findViewById(R.id.a_landing_scene_b_button).setOnClickListener(view -> {
+        getSystemBus().onNext(new LaunchListEvent(editText.getText().toString()));
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+            makeSceneTransitionAnimation(this, view, getString(R.string.activity_fab_trans));
+        startActivity(new Intent(this, RepoListActivity.class), options.toBundle());
       });
-    }
+    });
   }
 
   @OnClick(R.id.a_landing_scene_a_user) public void onClickUser(@Nullable View view) {
-    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      Transition transition = new ChangeBounds().removeTarget(R.id.a_landing_scene_b_button);
-      transition.setDuration(500);
-      transition.setInterpolator(new AccelerateDecelerateInterpolator());
-      TransitionManager.go(sceneB, transition);
-    }
+    Transition transition = new ChangeBounds().removeTarget(R.id.a_landing_scene_b_button);
+    transition.setDuration(500);
+    transition.setInterpolator(new AccelerateDecelerateInterpolator());
+    TransitionManager.go(sceneB, transition);
   }
 }

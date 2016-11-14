@@ -9,10 +9,18 @@
     <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorPrimary</item>
     <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
+    <item name="android:windowContentTransitions">true</item>
+    <item name="android:windowEnterTransition">@transition/button_to_fab_transition</item>
+    <item name="android:windowExitTransition">@transition/button_to_fab_transition</item>
   </style>
 
   <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
     <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="RobotoTextViewStyle.Title" parent="RobotoTextViewStyle">
+    <item name="android:textSize">18sp</item>
   </style>
 
   <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
@@ -37,6 +45,9 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     <item name="buttonBarButtonStyle">@style/RobotoButtonStyle</item>
+    <item name="android:windowContentTransitions">true</item>
+    <item name="android:windowEnterTransition">@transition/button_to_fab_transition</item>
+    <item name="android:windowExitTransition">@transition/button_to_fab_transition</item>
   </style>
 
 </resources>

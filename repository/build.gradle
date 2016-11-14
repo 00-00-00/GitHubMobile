@@ -11,7 +11,7 @@ android {
     versionCode 1
     versionName "1.0"
     buildConfigField 'String', 'HOST',
-        '"https://project-geo-x.herokuapp.com/"'
+        '"https://api.github.com/"'
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   buildTypes {

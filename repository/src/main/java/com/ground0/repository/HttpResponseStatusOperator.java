@@ -11,12 +11,12 @@ import rx.Subscriber;
 /**
  * Created by zer0 on 17/10/16.
  */
-@Singleton public class HttpResponseStatusOperator<T> implements Observable.Operator<T, Response<T>> {
+@Singleton public class HttpResponseStatusOperator<T>
+    implements Observable.Operator<T, Response<T>> {
 
   CustomObjectMapper objectMapper;
 
-  @Inject
-  public HttpResponseStatusOperator(CustomObjectMapper objectMapper) {
+  @Inject public HttpResponseStatusOperator(CustomObjectMapper objectMapper) {
     this.objectMapper = objectMapper;
   }
 
@@ -33,15 +33,15 @@ import rx.Subscriber;
       }
 
       @Override public void onNext(Response<T> response) {
-        if (subscriber.isUnsubscribed())return;
-        Log.d(getClass().getSimpleName(), response.body().toString());
+        if (subscriber.isUnsubscribed()) return;
+        if (response == null) return;
+        if (response.body() != null) Log.d(getClass().getSimpleName(), response.body().toString());
         if (response.isSuccessful()) {
           subscriber.onNext(response.body());
-        }
-        else
-        {
+        } else {
           try {
-            subscriber.onError(new RestApiException(response.code(), response.errorBody().string(), objectMapper));
+            subscriber.onError(
+                new RestApiException(response.code(), response.errorBody().string(), objectMapper));
           } catch (IOException e) {
             e.printStackTrace();
           }

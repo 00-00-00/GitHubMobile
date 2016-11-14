@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <data>
+    <variable
+        name="viewModel"
+        type="com.ground0.githubmobile.viewmodel.RepoItemViewModelFactory.RepoItemViewModel"
+        />
+  </data>
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?android:selectableItemBackground"
+      android:orientation="vertical"
+      >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/i_repo_imageView"
+        android:layout_width="@dimen/view_step_8"
+        android:layout_height="@dimen/view_step_8"
+        android:layout_marginBottom="@dimen/view_step_2"
+        android:layout_marginEnd="@dimen/view_step_3"
+        android:layout_marginStart="@dimen/view_step_3"
+        android:layout_marginTop="@dimen/view_step_2"
+        android:src='@{viewModel.drawable}'
+        />
+
+    <TextView
+        android:id="@+id/i_repo_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/i_repo_imageView"
+        android:layout_marginTop="@dimen/view_step_1"
+        android:layout_toRightOf="@id/i_repo_imageView"
+        android:text='@{viewModel.repo.name}'
+        style="@style/RobotoTextViewStyle.Title"
+        />
+
+    <TextView
+        android:id="@+id/i_repo_text_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/i_repo_text_title"
+        android:layout_below="@+id/i_repo_text_title"
+        android:layout_marginBottom="@dimen/view_step_2"
+        android:layout_marginTop="@dimen/view_step_1"
+        android:text='@{viewModel.repo.description}'
+        />
+
+    <View
+        android:layout_width="@dimen/view_step_14"
+        android:layout_height="@dimen/divider"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/md_light_dividers"
+        />
+
+  </RelativeLayout>
+</layout>
