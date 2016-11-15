@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.ground0.githubmobile.R;
 import com.ground0.githubmobile.core.components.BaseActivity;
-import com.ground0.githubmobile.core.event.LaunchListEvent;
+import com.ground0.githubmobile.event.LaunchRepoListEvent;
 import com.ground0.githubmobile.viewmodel.LandingActivityViewModel;
 import javax.inject.Inject;
 
@@ -58,7 +58,7 @@ public class LandingActivity extends BaseActivity {
       findViewById(R.id.a_landing_scene_b_button).animate();
       EditText editText = (EditText) findViewById(R.id.a_landing_scene_b_username);
       findViewById(R.id.a_landing_scene_b_button).setOnClickListener(view -> {
-        getSystemBus().onNext(new LaunchListEvent(editText.getText().toString()));
+        getSystemBus().onNext(new LaunchRepoListEvent(editText.getText().toString()));
         ActivityOptionsCompat options = ActivityOptionsCompat.
             makeSceneTransitionAnimation(this, view, getString(R.string.activity_fab_trans));
         startActivity(new Intent(this, RepoListActivity.class), options.toBundle());

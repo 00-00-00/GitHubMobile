@@ -1,10 +1,12 @@
 package com.ground0.githubmobile.viewmodel;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import com.ground0.githubmobile.activity.RepoListActivity;
 import com.ground0.githubmobile.adapter.RepoListRecyclerAdapter;
-import com.ground0.githubmobile.core.event.LaunchListEvent;
 import com.ground0.githubmobile.core.viewmodel.BaseActivityViewModel;
+import com.ground0.githubmobile.event.LaunchRepoDetailEvent;
+import com.ground0.githubmobile.event.LaunchRepoListEvent;
 import com.ground0.model.Repo;
 import com.ground0.repository.repository.UserRepository;
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by zer0 on 14/11/16.
  */
 
-public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListActivity> {
+public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListActivity>
+    implements RepoItemViewModelFactory.RepoItemViewModelHandler {
 
   @Inject public RepoListActivityViewModel() {
   }
@@ -33,16 +36,17 @@ public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListAct
   }
 
   private void initSubscriptions() {
-    getCompositeSubscription().add(getSystemBus().filter(event -> event instanceof LaunchListEvent)
-        .subscribe(getSubscriptionBuilder().builder().onNext(event -> {
-          userName = ((LaunchListEvent) event).data();
-          fetchData();
-        }).build()));
+    getCompositeSubscription().add(
+        getSystemBus().filter(event -> event instanceof LaunchRepoListEvent)
+            .subscribe(getSubscriptionBuilder().builder().onNext(event -> {
+              userName = ((LaunchRepoListEvent) event).data();
+              fetchData();
+            }).build()));
   }
 
   public RepoListRecyclerAdapter getRepoListRecyclerAdapter() {
     if (repoListRecyclerAdapter == null) {
-      repoListRecyclerAdapter = new RepoListRecyclerAdapter(getActualActivity(), repos);
+      repoListRecyclerAdapter = new RepoListRecyclerAdapter(getActualActivity(), repos, this);
     }
     return repoListRecyclerAdapter;
   }
@@ -74,5 +78,10 @@ public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListAct
 
   public String getUserName() {
     return userName;
+  }
+
+  @Override public void openDetail(Repo repo, View sharedView) {
+    getActualActivity().getSystemBus().onNext(new LaunchRepoDetailEvent(repo));
+    getActualActivity().launchRepoDetailActivity(sharedView);
   }
 }

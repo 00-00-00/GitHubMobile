@@ -11,6 +11,8 @@
       android:layout_height="wrap_content"
       android:background="?android:selectableItemBackground"
       android:orientation="vertical"
+      android:clickable="true"
+      android:onClick='@{viewModel::openDetail}'
       >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/i_repo_imageView"

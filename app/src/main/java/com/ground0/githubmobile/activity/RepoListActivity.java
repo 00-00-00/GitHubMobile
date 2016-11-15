@@ -1,9 +1,12 @@
 package com.ground0.githubmobile.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.ground0.githubmobile.R;
@@ -45,5 +48,11 @@ public class RepoListActivity extends BaseActivity {
   private void initUI() {
     floatingActionButton.setTransitionName(getString(R.string.activity_fab_trans));
     getSupportActionBar().setTitle(viewModel.getUserName());
+  }
+
+  public void launchRepoDetailActivity(View sharedView) {
+    ActivityOptionsCompat options = ActivityOptionsCompat.
+        makeSceneTransitionAnimation(this, sharedView, getString(R.string.activity_prof_transition));
+    startActivity(new Intent(this, RepoDetailActivity.class), options.toBundle());
   }
 }

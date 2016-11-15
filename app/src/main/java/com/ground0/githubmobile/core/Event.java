@@ -14,8 +14,10 @@ public interface Event<T> {
 
   @EventType int eventType();
 
-  @Retention(RetentionPolicy.SOURCE) @IntDef({ LAUNCH_LIST }) public @interface EventType {
+  @Retention(RetentionPolicy.SOURCE) @IntDef({ LAUNCH_REPO_LIST, LAUNCH_REPO_DETAIL }) public @interface EventType {
   }
 
-  public static final int LAUNCH_LIST = 0;
+  public static final int LAUNCH_REPO_LIST = 0;
+  public static final int LAUNCH_REPO_DETAIL = 1;
+
 }

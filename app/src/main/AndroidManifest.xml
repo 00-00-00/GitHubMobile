@@ -22,6 +22,10 @@
     <activity
         android:name=".activity.RepoListActivity"
         android:theme="@style/GithubMobileTheme"/>
+
+    <activity
+        android:name=".activity.RepoDetailActivity"
+        android:theme="@style/GithubMobileTheme"/>
   </application>
 
 </manifest>

@@ -22,9 +22,10 @@ public class RepoListRecyclerAdapter
   List<Repo> data;
   RepoItemViewModelFactory repoItemViewModelFactory;
 
-  public RepoListRecyclerAdapter(Context context, List<Repo> data) {
+  public RepoListRecyclerAdapter(Context context, List<Repo> data,
+      RepoItemViewModelFactory.RepoItemViewModelHandler handler) {
     this.data = data;
-    repoItemViewModelFactory = new RepoItemViewModelFactory(context);
+    repoItemViewModelFactory = new RepoItemViewModelFactory(context, handler);
   }
 
   @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

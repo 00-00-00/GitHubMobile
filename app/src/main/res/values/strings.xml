@@ -2,4 +2,5 @@
   <string name="app_name">GitHubMobile</string>
   <string name="user">User</string>
   <string name="activity_fab_trans">Fabtransition</string>
+  <string name="activity_prof_transition">activityDetailTransition</string>
 </resources>

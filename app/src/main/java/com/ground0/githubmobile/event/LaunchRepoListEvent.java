@@ -1,4 +1,4 @@
-package com.ground0.githubmobile.core.event;
+package com.ground0.githubmobile.event;
 
 import com.ground0.githubmobile.core.Event;
 
@@ -6,11 +6,11 @@ import com.ground0.githubmobile.core.Event;
  * Created by zer0 on 14/11/16.
  */
 
-public class LaunchListEvent implements Event<String> {
+public class LaunchRepoListEvent implements Event<String> {
 
   String userName;
 
-  public LaunchListEvent(String userName) {
+  public LaunchRepoListEvent(String userName) {
     this.userName = userName;
   }
 
@@ -19,6 +19,6 @@ public class LaunchListEvent implements Event<String> {
   }
 
   @Override public int eventType() {
-    return LAUNCH_LIST;
+    return LAUNCH_REPO_LIST;
   }
 }
