@@ -26,7 +26,7 @@ public class RepoDetailActivity extends BaseActivity {
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    repoDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_repo_deNtail);
+    repoDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_repo_detail);
     repoDetailBinding.setViewModel(viewModel);
     ButterKnife.bind(this);
     initUI();
