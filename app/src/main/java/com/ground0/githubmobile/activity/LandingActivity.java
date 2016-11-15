@@ -58,18 +58,19 @@ public class LandingActivity extends BaseActivity {
       animation.setStartOffset(500);
       findViewById(R.id.a_landing_scene_b_button).setAnimation(animation);
       findViewById(R.id.a_landing_scene_b_button).animate();
-      EditText editText = (EditText) findViewById(R.id.a_landing_scene_b_username);
-      findViewById(R.id.a_landing_scene_b_button).setOnClickListener(view -> {
-        getSystemBus().onNext(new LaunchRepoListEvent(editText.getText().toString()));
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-            makeSceneTransitionAnimation(this, view, getString(R.string.activity_fab_trans));
-        startActivity(new Intent(this, RepoListActivity.class), options.toBundle());
-      });
+      findViewById(R.id.a_landing_scene_b_button).setOnClickListener(this::onClickApply);
     });
   }
 
   @OnClick(R.id.a_landing_scene_a_user) public void onClickUser(@Nullable View view) {
 
+    Transition transition = new ChangeBounds().removeTarget(R.id.a_landing_scene_b_button);
+    transition.setDuration(500);
+    transition.setInterpolator(new AccelerateDecelerateInterpolator());
+    TransitionManager.go(sceneB, transition);
+  }
+
+  public void onClickApply(@Nullable View view) {
     EditText userName = ButterKnife.findById(this, R.id.a_landing_scene_b_username);
     TextInputLayout textInputLayout = ButterKnife.findById(this, R.id.a_landing_scene_b_button);
     if (StringUtils.isBlank(userName.getText().toString())) {
@@ -78,10 +79,9 @@ public class LandingActivity extends BaseActivity {
     } else {
       textInputLayout.setError(null);
     }
-
-    Transition transition = new ChangeBounds().removeTarget(R.id.a_landing_scene_b_button);
-    transition.setDuration(500);
-    transition.setInterpolator(new AccelerateDecelerateInterpolator());
-    TransitionManager.go(sceneB, transition);
+    getSystemBus().onNext(new LaunchRepoListEvent(userName.getText().toString()));
+    ActivityOptionsCompat options = ActivityOptionsCompat.
+        makeSceneTransitionAnimation(this, view, getString(R.string.activity_fab_trans));
+    startActivity(new Intent(this, RepoListActivity.class), options.toBundle());
   }
 }
