@@ -3,6 +3,7 @@ package com.ground0.githubmobile.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.transition.ChangeBounds;
 import android.transition.Scene;
@@ -22,6 +23,7 @@ import com.ground0.githubmobile.core.components.BaseActivity;
 import com.ground0.githubmobile.event.LaunchRepoListEvent;
 import com.ground0.githubmobile.viewmodel.LandingActivityViewModel;
 import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
 
 public class LandingActivity extends BaseActivity {
 
@@ -67,6 +69,16 @@ public class LandingActivity extends BaseActivity {
   }
 
   @OnClick(R.id.a_landing_scene_a_user) public void onClickUser(@Nullable View view) {
+
+    EditText userName = ButterKnife.findById(this, R.id.a_landing_scene_b_username);
+    TextInputLayout textInputLayout = ButterKnife.findById(this, R.id.a_landing_scene_b_button);
+    if (StringUtils.isBlank(userName.getText().toString())) {
+      textInputLayout.setError(getString(R.string.mandatory_error));
+      return;
+    } else {
+      textInputLayout.setError(null);
+    }
+
     Transition transition = new ChangeBounds().removeTarget(R.id.a_landing_scene_b_button);
     transition.setDuration(500);
     transition.setInterpolator(new AccelerateDecelerateInterpolator());

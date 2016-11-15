@@ -10,6 +10,7 @@ import com.ground0.githubmobile.R;
 import com.ground0.githubmobile.core.components.BaseActivity;
 import com.ground0.githubmobile.databinding.ActivityRepoDetailBinding;
 import com.ground0.githubmobile.viewmodel.RepoDetailActivityViewModel;
+import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 /**
@@ -20,11 +21,12 @@ public class RepoDetailActivity extends BaseActivity {
 
   @Inject RepoDetailActivityViewModel viewModel;
   @BindView(R.id.a_repo_detail_imageView) ImageView imageView;
+  @BindView(R.id.a_repo_detail_owner_image) ImageView ownerImageView;
   ActivityRepoDetailBinding repoDetailBinding;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    repoDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_repo_detail);
+    repoDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_repo_deNtail);
     repoDetailBinding.setViewModel(viewModel);
     ButterKnife.bind(this);
     initUI();
@@ -42,6 +44,7 @@ public class RepoDetailActivity extends BaseActivity {
     imageView.setTransitionName(getString(R.string.activity_prof_transition));
     if (viewModel.getRepo() != null) {
       getSupportActionBar().setTitle(viewModel.getRepo().getFullName());
+      Picasso.with(this).load(viewModel.getRepo().getOwner().getAvatarUrl()).into(ownerImageView);
     }
   }
 }

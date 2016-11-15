@@ -3,9 +3,10 @@
   <data>
     <variable
         name="viewModel"
-        type="com.ground0.githubmobile.viewmodel.RepoDetailActivityViewModel"/>
+        type="com.ground0.githubmobile.viewmodel.RepoDetailActivityViewModel"
+        />
   </data>
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
@@ -21,5 +22,101 @@
         android:src='@{viewModel.drawable}'
         />
 
-  </LinearLayout>
+    <TextView
+        android:id="@+id/a_repo_detail_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/a_repo_detail_imageView"
+        android:layout_marginTop="@dimen/view_step_1"
+        android:layout_toRightOf="@id/a_repo_detail_imageView"
+        android:text='@{viewModel.repo.name}'
+        style="@style/RobotoTextViewStyle.Title"
+        />
+
+    <TextView
+        android:id="@+id/a_repo_detail_text_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/a_repo_detail_text_title"
+        android:layout_below="@+id/a_repo_detail_text_title"
+        android:layout_marginBottom="@dimen/view_step_2"
+        android:layout_marginTop="@dimen/view_step_1"
+        android:text='@{viewModel.repo.description}'
+        />
+
+    <View
+        android:id="@+id/a_repo_detail_divider_1"
+        android:layout_width="@dimen/view_step_14"
+        android:layout_height="@dimen/divider"
+        android:layout_below="@+id/a_repo_detail_text_sub_title"
+        android:layout_centerHorizontal="true"
+        android:background="@color/md_light_dividers"
+        />
+
+    <LinearLayout
+        android:id="@+id/a_repo_detail_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/a_repo_detail_divider_1"
+        android:layout_marginTop="@dimen/view_step_2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="@dimen/view_step_4"
+          android:text="@string/owner"
+          />
+      <ImageView
+          android:id="@+id/a_repo_detail_owner_image"
+          android:layout_width="@dimen/view_step_6"
+          android:layout_height="@dimen/view_step_6"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text='@{viewModel.repo.owner.id}'
+          />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/a_repo_detail_divider_2"
+        android:layout_width="@dimen/view_step_14"
+        android:layout_height="@dimen/divider"
+        android:layout_below="@+id/a_repo_detail_layout_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/view_step_2"
+        android:background="@color/md_light_dividers"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/a_repo_detail_divider_2"
+        android:layout_marginTop="@dimen/view_step_2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginRight="@dimen/view_step_4"
+          android:drawableLeft="@drawable/ic_visibility_black_24dp"
+          android:drawablePadding="@dimen/view_step_2"
+          android:text='@{viewModel.repo.watchersCount}'
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginRight="@dimen/view_step_4"
+          android:drawableLeft="@drawable/ic_star_black_24dp"
+          android:drawablePadding="@dimen/view_step_2"
+          android:text='@{viewModel.repo.watchersCount}'
+          />
+    </LinearLayout>
+
+  </RelativeLayout>
 </layout>
