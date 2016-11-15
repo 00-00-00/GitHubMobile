@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import butterknife.BindView;
@@ -21,8 +22,10 @@ import javax.inject.Inject;
 public class RepoListActivity extends BaseActivity {
 
   @Inject RepoListActivityViewModel viewModel;
+  @BindView(R.id.a_repo_list_swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
   @BindView(R.id.a_repo_list_recycler) RecyclerView recyclerView;
   @BindView(R.id.a_repo_list_fab) FloatingActionButton floatingActionButton;
+  @BindView(R.id.a_repo_list_empty_view) View emptyView;
 
   @Override protected void registerActivityWithViewModel() {
     viewModel.registerActivity(this);
@@ -48,11 +51,27 @@ public class RepoListActivity extends BaseActivity {
   private void initUI() {
     floatingActionButton.setTransitionName(getString(R.string.activity_fab_trans));
     getSupportActionBar().setTitle(viewModel.getUserName());
+    swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
+    swipeRefreshLayout.setOnRefreshListener(() -> {
+      viewModel.fetchData();
+    });
   }
 
   public void launchRepoDetailActivity(View sharedView) {
     ActivityOptionsCompat options = ActivityOptionsCompat.
-        makeSceneTransitionAnimation(this, sharedView, getString(R.string.activity_prof_transition));
+        makeSceneTransitionAnimation(this, sharedView,
+            getString(R.string.activity_prof_transition));
     startActivity(new Intent(this, RepoDetailActivity.class), options.toBundle());
+  }
+
+  public void initDataLoad() {
+    if (swipeRefreshLayout != null) swipeRefreshLayout.setRefreshing(true);
+  }
+
+  public void dataLoaded() {
+    swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(false));
+    if (viewModel.getRepos() != null) {
+      emptyView.setVisibility(viewModel.getRepos().isEmpty() ? View.VISIBLE : View.INVISIBLE);
+    }
   }
 }

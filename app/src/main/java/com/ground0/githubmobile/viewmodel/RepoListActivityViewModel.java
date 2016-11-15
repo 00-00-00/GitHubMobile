@@ -67,12 +67,15 @@ public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListAct
   }
 
   public void fetchData() {
+    getActualActivity().initDataLoad();
     getCompositeSubscription().add(userRepository.getUsers(userName)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(getSubscriptionBuilder().builder().onNext(val -> {
           setRepos((List<Repo>) val);
+          getActualActivity().dataLoaded();
         }).onError(e -> {
-          getActualActivity().showSnackBar("Error while fetching Repos");
+          getActualActivity().showSnackBar("Error while fetching Repos", "Retry", v -> fetchData());
+          getActualActivity().dataLoaded();
         }).setFinishOnComplete().build()));
   }
 
@@ -83,5 +86,9 @@ public class RepoListActivityViewModel extends BaseActivityViewModel<RepoListAct
   @Override public void openDetail(Repo repo, View sharedView) {
     getActualActivity().getSystemBus().onNext(new LaunchRepoDetailEvent(repo));
     getActualActivity().launchRepoDetailActivity(sharedView);
+  }
+
+  public List<Repo> getRepos() {
+    return repos;
   }
 }

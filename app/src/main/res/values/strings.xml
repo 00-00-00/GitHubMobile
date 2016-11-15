@@ -1,8 +1,10 @@
 <resources>
   <string name="app_name">GitHubMobile</string>
-  <string name="user">User</string>
+  <string name="user">Start</string>
   <string name="activity_fab_trans">Fabtransition</string>
   <string name="activity_prof_transition">activityDetailTransition</string>
   <string name="owner">Owner</string>
   <string name="mandatory_error">Cannot be empty</string>
+  <string name="github_user_name">Github User Name</string>
+  <string name="failed_to_load">Empty Repos</string>
 </resources>

@@ -43,6 +43,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
+          android:layout_marginTop="@dimen/view_step_2"
           >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -66,7 +67,9 @@
                 android:id="@+id/a_landing_scene_b_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Github User Name"
+                android:hint="@string/github_user_name"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
                 />
           </android.support.design.widget.TextInputLayout>
         </android.support.v7.widget.CardView>

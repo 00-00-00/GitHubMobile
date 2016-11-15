@@ -72,11 +72,12 @@
           android:id="@+id/a_repo_detail_owner_image"
           android:layout_width="@dimen/view_step_6"
           android:layout_height="@dimen/view_step_6"
+          android:layout_marginRight="@dimen/view_step_1"
           />
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text='@{String.valueOf(viewModel.repo.owner.id)}'
+          android:text='@{String.valueOf(viewModel.repo.owner.login)}'
           />
     </LinearLayout>
 
@@ -105,7 +106,7 @@
           android:layout_marginRight="@dimen/view_step_4"
           android:drawableLeft="@drawable/ic_visibility_black_24dp"
           android:drawablePadding="@dimen/view_step_2"
-          android:text='@{String.valueOf(viewModel.repo.watchersCount)}'
+          android:text='@{String.valueOf(viewModel.repo.watchers)}'
           />
       <TextView
           android:layout_width="wrap_content"
@@ -114,7 +115,17 @@
           android:layout_marginRight="@dimen/view_step_4"
           android:drawableLeft="@drawable/ic_star_black_24dp"
           android:drawablePadding="@dimen/view_step_2"
-          android:text='@{String.valueOf(viewModel.repo.watchersCount)}'
+          android:text='@{String.valueOf(viewModel.repo.stargazersCount)}'
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginRight="@dimen/view_step_4"
+          android:drawableLeft="@drawable/ic_repo_forked"
+          android:drawablePadding="@dimen/view_step_2"
+          android:text='@{String.valueOf(viewModel.repo.forks)}'
           />
     </LinearLayout>
 

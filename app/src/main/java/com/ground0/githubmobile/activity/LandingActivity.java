@@ -1,5 +1,6 @@
 package com.ground0.githubmobile.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,16 +10,20 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.OnFocusChange;
 import com.ground0.githubmobile.R;
 import com.ground0.githubmobile.core.components.BaseActivity;
 import com.ground0.githubmobile.databinding.ActivityLandingBinding;
@@ -67,23 +72,6 @@ public class LandingActivity extends BaseActivity {
     getApplicationComponent().inject(this);
   }
 
-  @OnClick(R.id.a_landing_scene_a_user) public void onClickUser(@Nullable View view) {
-    setState(SCENE_B);
-  }
-
-  @OnClick(R.id.a_landing_scene_b_button) public void onClickApply(@Nullable View view) {
-    if (StringUtils.isBlank(userName.getText().toString())) {
-      textInputLayout.setError(getString(R.string.mandatory_error));
-      return;
-    } else {
-      textInputLayout.setError(null);
-    }
-    getSystemBus().onNext(new LaunchRepoListEvent(userName.getText().toString()));
-    ActivityOptionsCompat options = ActivityOptionsCompat.
-        makeSceneTransitionAnimation(this, view, getString(R.string.activity_fab_trans));
-    startActivity(new Intent(this, RepoListActivity.class), options.toBundle());
-  }
-
   @Override protected void onSaveInstanceState(Bundle outState) {
     outState.putInt(ACTIVITY_STATE_KEY, activityState);
     super.onSaveInstanceState(outState);
@@ -103,6 +91,38 @@ public class LandingActivity extends BaseActivity {
     } else {
       setState(SCENE_A);
     }
+  }
+
+  @OnClick(R.id.a_landing_scene_a_user) public void onClickUser(@Nullable View view) {
+    setState(SCENE_B);
+  }
+
+  @OnFocusChange(R.id.a_landing_scene_b_button) public void onSceneBButtonFocus(boolean focused) {
+    if (focused) {
+      InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
+    }
+  }
+
+  @OnEditorAction(R.id.a_landing_scene_b_username)
+  public boolean onUserNameEditorAction(KeyEvent keyEvent) {
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
+    onClickApply(null);
+    return false;
+  }
+
+  @OnClick(R.id.a_landing_scene_b_button) public void onClickApply(@Nullable View view) {
+    if (StringUtils.isBlank(userName.getText().toString())) {
+      textInputLayout.setError(getString(R.string.mandatory_error));
+      return;
+    } else {
+      textInputLayout.setError(null);
+    }
+    getSystemBus().onNext(new LaunchRepoListEvent(userName.getText().toString()));
+    ActivityOptionsCompat options = ActivityOptionsCompat.
+        makeSceneTransitionAnimation(this, sceneBButton, getString(R.string.activity_fab_trans));
+    startActivity(new Intent(this, RepoListActivity.class), options.toBundle());
   }
 
   private void setState(@State int state) {

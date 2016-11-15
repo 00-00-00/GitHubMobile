@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/a_repo_list_swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/a_repo_list_recycler"
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scrollbars="vertical"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      />
+      >
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/a_repo_list_fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:transitionName="@string/activity_fab_trans"
-      android:layout_alignParentEnd="true"
-      android:layout_margin="@dimen/view_step_2"
-      app:elevation="@dimen/fab_elevation"
-      app:fabSize="normal"
-      app:pressedTranslationZ="@dimen/view_step_2"
-      app:rippleColor="@color/colorAccentDark"
-      />
-</RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/a_repo_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:id="@+id/a_repo_list_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="@dimen/view_step_1"
+        android:drawableTop="@drawable/ic_cloud_off_grey_72dp"
+        android:gravity="center"
+        android:text="@string/failed_to_load"
+        android:visibility="invisible"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/a_repo_list_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/view_step_2"
+        android:transitionName="@string/activity_fab_trans"
+        app:elevation="@dimen/fab_elevation"
+        app:fabSize="normal"
+        app:pressedTranslationZ="@dimen/view_step_2"
+        app:rippleColor="@color/colorAccentDark"
+        />
+  </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
