@@ -21,11 +21,11 @@ public class PixelUtil {
     return dp <= 0 ? 0 : (int) (screen_density * dp + 0.5f);
   }
 
-  public static float convertPixelsToDp(float px, Context context) {
+  public static int convertPixelsToDp(Context context, float px) {
 
     float screenDensity = context.getResources().getDisplayMetrics().density;
     float dp = px / (screenDensity / 160f);
-    return dp;
+    return Math.round(dp);
   }
 
   /*

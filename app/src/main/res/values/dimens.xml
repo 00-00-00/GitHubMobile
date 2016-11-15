@@ -6,6 +6,7 @@
   <dimen name="app_bar_elevation">4dp</dimen>
   <dimen name="fab_elevation">8dp</dimen>
 
+  <dimen name="view_step_0">0dp</dimen>
   <dimen name="view_step_1">8dp</dimen>
   <dimen name="view_step_2">16dp</dimen>
   <dimen name="view_step_3">24dp</dimen>
