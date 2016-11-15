@@ -7,6 +7,8 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.transition.ChangeBounds;
+import android.transition.Transition;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -37,6 +39,7 @@ public class LandingActivity extends BaseActivity {
   @BindView(R.id.a_landing_scene_b_username) EditText userName;
   @BindView(R.id.a_landing_scene_b_username_layout) TextInputLayout textInputLayout;
   @BindView(R.id.a_landing_image) View imageView;
+  @BindView(R.id.a_landing_scene_b_card) View cardView;
   @Inject LandingActivityViewModel viewModel;
   @State int activityState;
   ActivityLandingBinding activityLandingBinding;
@@ -52,6 +55,7 @@ public class LandingActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     activityLandingBinding = DataBindingUtil.setContentView(this, R.layout.activity_landing);
     ButterKnife.bind(this);
+    initTransitions();
     setState(SCENE_A);
   }
 
@@ -113,7 +117,7 @@ public class LandingActivity extends BaseActivity {
         imageView.setLayoutParams(layoutParams1);
         break;
       case SCENE_B:
-        startButtonAnimation();
+        startAnimation();
         LinearLayout.LayoutParams layoutParams2 =
             (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams2.setMargins(0, 0, 0, 0);
@@ -122,13 +126,24 @@ public class LandingActivity extends BaseActivity {
     }
   }
 
-  private void startButtonAnimation() {
+  private void startAnimation() {
 
     // Create the scenes
-    Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation_0_1);
-    animation.setInterpolator(new AccelerateDecelerateInterpolator());
-    animation.setStartOffset(500);
-    sceneBButton.setAnimation(animation);
+    Animation scaleCard = AnimationUtils.loadAnimation(this, R.anim.scale_animation_button_card);
+    Animation scaleButton = AnimationUtils.loadAnimation(this, R.anim.scale_animation_0_1);
+
+    scaleButton.setInterpolator(new AccelerateDecelerateInterpolator());
+    scaleCard.setInterpolator(new AccelerateDecelerateInterpolator());
+    scaleButton.setStartOffset(500);
+
+    cardView.setAnimation(scaleCard);
+    sceneBButton.setAnimation(scaleButton);
+
+    cardView.animate();
     sceneBButton.animate();
+  }
+
+  private void initTransitions() {
+    Transition transition = new ChangeBounds();
   }
 }
