@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-  <de.hdodenhof.circleimageview.CircleImageView
-      android:id="@+id/a_repo_detail_imageView"
-      android:layout_width="@dimen/view_step_8"
-      android:layout_height="@dimen/view_step_8"
-      android:layout_marginBottom="@dimen/view_step_2"
-      android:layout_marginEnd="@dimen/view_step_3"
-      android:layout_marginStart="@dimen/view_step_3"
-      android:layout_marginTop="@dimen/view_step_2"
-      android:src='@color/colorAccent'
-      />
+<layout>
+  <data>
+    <variable
+        name="viewModel"
+        type="com.ground0.githubmobile.viewmodel.RepoDetailActivityViewModel"/>
+  </data>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/a_repo_detail_imageView"
+        android:layout_width="@dimen/view_step_8"
+        android:layout_height="@dimen/view_step_8"
+        android:layout_marginBottom="@dimen/view_step_2"
+        android:layout_marginEnd="@dimen/view_step_3"
+        android:layout_marginStart="@dimen/view_step_3"
+        android:layout_marginTop="@dimen/view_step_2"
+        android:src='@{viewModel.drawable}'
+        />
 
-</LinearLayout>
+  </LinearLayout>
+</layout>

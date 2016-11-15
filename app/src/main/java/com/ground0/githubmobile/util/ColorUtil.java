@@ -36,4 +36,10 @@ public class ColorUtil {
     int index = (new Random().nextInt(materialColors.size()));
     return new ColorDrawable(materialColors.get(index));
   }
+
+  public static Drawable getMaterialDrawable(Context context, String name) {
+    initSparseArray(context);
+    int index = (new Random(name.hashCode()).nextInt(materialColors.size()));
+    return new ColorDrawable(materialColors.get(index));
+  }
 }

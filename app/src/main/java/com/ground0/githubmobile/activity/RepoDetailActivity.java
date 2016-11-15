@@ -1,5 +1,6 @@
 package com.ground0.githubmobile.activity;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.ground0.githubmobile.R;
 import com.ground0.githubmobile.core.components.BaseActivity;
+import com.ground0.githubmobile.databinding.ActivityRepoDetailBinding;
 import com.ground0.githubmobile.viewmodel.RepoDetailActivityViewModel;
 import javax.inject.Inject;
 
@@ -18,10 +20,12 @@ public class RepoDetailActivity extends BaseActivity {
 
   @Inject RepoDetailActivityViewModel viewModel;
   @BindView(R.id.a_repo_detail_imageView) ImageView imageView;
+  ActivityRepoDetailBinding repoDetailBinding;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_repo_detail);
+    repoDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_repo_detail);
+    repoDetailBinding.setViewModel(viewModel);
     ButterKnife.bind(this);
     initUI();
   }

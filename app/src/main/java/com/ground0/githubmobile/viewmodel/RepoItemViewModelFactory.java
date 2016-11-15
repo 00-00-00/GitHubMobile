@@ -33,7 +33,7 @@ public class RepoItemViewModelFactory {
 
     RepoItemViewModel(Repo repo) {
       this.repo = repo;
-      this.drawable = ColorUtil.getRandomMaterialDrawable(reference.get());
+      this.drawable = ColorUtil.getMaterialDrawable(reference.get(), repo.getFullName());
     }
 
     public Repo getRepo() {
