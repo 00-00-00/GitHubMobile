@@ -72,7 +72,8 @@ public class LandingActivity extends BaseActivity {
 
   public void onClickApply(@Nullable View view) {
     EditText userName = ButterKnife.findById(this, R.id.a_landing_scene_b_username);
-    TextInputLayout textInputLayout = ButterKnife.findById(this, R.id.a_landing_scene_b_button);
+    TextInputLayout textInputLayout =
+        ButterKnife.findById(this, R.id.a_landing_scene_b_username_layout);
     if (StringUtils.isBlank(userName.getText().toString())) {
       textInputLayout.setError(getString(R.string.mandatory_error));
       return;
