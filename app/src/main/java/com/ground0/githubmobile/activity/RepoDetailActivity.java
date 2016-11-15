@@ -35,7 +35,7 @@ public class RepoDetailActivity extends BaseActivity {
   }
 
   private void initUI() {
-    imageView.setTransitionName(getString(R.string.activity_fab_trans));
+    imageView.setTransitionName(getString(R.string.activity_prof_transition));
     if (viewModel.getRepo() != null) {
       getSupportActionBar().setTitle(viewModel.getRepo().getFullName());
     }
